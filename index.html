@@ -4,12 +4,52 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style rel="stylesheet" href="./assets/css/reset.css"></style>
-  <style rel="stylesheet" href="./assets/css/style.css"></style>
-  <title>Document</title>
+  <link rel="stylesheet" href="./assets/css/reset.css"></link>
+  <link rel="stylesheet" href="./assets/css/style.css"></link>
+  <title>JS Quiz</title>
 </head>
+
 <body>
-  
+  <header>
+    <section id="head">
+      <h2><button id="high-score">View Highscores</button></h2>
+      <h2 id="timer-countdown">Time Remaining</h2>
+    </section>
+  </header>
+
+  <main>
+    <section id="start-screen">
+      <h1>Coding Quiz Challenge</h1>
+      <p>Try to answer the following code-related questions within the time limit.  Keep in mind that incorrect answers will penalise your scoretime by ten seconds!</p>
+      <button id="start-button">Start Quiz</button>
+    </section>
+
+    <section id="question-screen" class = "hide">
+      <h2 class="question-asked">placeholder</h2>
+      <!-- javascript to insert answers as a list of buttons.  User will click on the desired answer -->
+      <p id="result">placeholder corrent or incorrect</p>
+
+    </section>
+    <section id="game-over" class="hide">
+      <h2>Alll done!</h2>
+      <h3 id="final-score">Your final score is:  </h3>
+      <form class="submit high score"></form>
+        <!-- Enter initials text field -->
+        <button id="submit">Submit</button>
+    </section>
+
+    <section id="high-score" class="hide">
+      <h2>Highscores</h2>
+      <!-- Table of high scores from local storage created by JS and inserted, possibly inside a form -->
+      <button id="go-back">Go Back</button>
+      <button id="clear-scores">Clear Highscores</button>
+
+    </section>
+
+  </main>
+
+
+  <script src="./assets/js/quiz.js"></script>
   <script src="./assets/js/script.js"></script>
 </body>
 </html>
