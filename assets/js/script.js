@@ -32,9 +32,11 @@ function checkAnswer(event) {
   console.log(`correct answer is ${correctAnswer}`);
   if (correctAnswer) {
     console.log(`correct answer received`);
+    questionResult.textContent="Correct!"
   } else {
     timeRemaining = timeRemaining - 10;
     console.log('wrong answer given');
+    questionResult.textContent = "Wrong!";
   }
   // move to next question
   questionIndex = questionIndex + 1;
@@ -109,6 +111,16 @@ function getQuestions(questionIndex) {
   return;
 }
 
+function returnStart() {
+  // submit initials and score to local storage
+  // display start Page again
+  // re-enable high score button
+  console.log(`inReturnStart`);
+  highscoreBtn.disabled = false;
+  gameoverScrn.classList.add("hide");
+  startScrn.classList.remove("hide");
+}
+
 function endQuiz() {
   console.log("inendQuiz");
  
@@ -117,6 +129,9 @@ function endQuiz() {
   questionScrn.classList.add("hide");
    // hide question screen
   gameoverScrn.classList.remove("hide");
+  submitBtn.addEventListener("click", returnStart);
+
+  return;
 }
 
 function beginQuiz() {
@@ -143,7 +158,10 @@ function beginQuiz() {
 }
 
 function showHighScores() {
-  console.log(`inshowHighScores`)
+  console.log(`inshowHighScores`);
+  highScoreScrn.classList.remove("hide");
+  startScrn.classList.add("hide");
+  
 }
 
 // When user clicks on Start, start the quiz by calling beginQuiz

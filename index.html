@@ -27,20 +27,27 @@
     </section>
 
     <section id="question-screen" class = "hide">
-      <!-- show the question -->
-      <h2 class="question-asked"></h2>
-      <!-- show the answer list. Javascript to insert answers as a list of buttons.  User will click on the desired answer -->
-      <ol id="answer-list">
-
-      </ol>
-      <p id="result">placeholder corrent or incorrect</p>
-
+      <div>
+        <!-- show the question -->
+        <h2 class="question-asked"></h2>
+        <!-- show the answer list. Javascript to insert answers as a list of buttons.  User will click on the desired answer -->
+        <ol id="answer-list">
+        </ol>
+      </div>
+      
+      <div>
+        <!-- show whether correct or wrong -->
+        <br>
+        <p id="result">placeholder correct or incorrect</p>
+      </div>
     </section>
     <section id="game-over" class="hide">
       <h2>Alll done!</h2>
       <h3>Your final score is: <span id="final-score">placeholder</span>  </h3>
-      <form class="submit high score"></form>
+      <form class="submit-score"></form>
         <!-- Enter initials text field -->
+        <label for = "initials">Enter your initials: </label>
+        <input type="text" id="initials" name="initials">
         <button id="submit">Submit</button>
     </section>
 
