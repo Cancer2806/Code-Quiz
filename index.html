@@ -11,13 +11,15 @@
 
 <body>
   <header>
+    <!-- place highscore button and timer in header so that always visible at top of screen -->
     <section id="head">
       <h2><button id="high-score">View Highscores</button></h2>
-      <h2 id="timer-countdown">Time Remaining</h2>
+      <h2 id="timer-countdown">Time Remaining:  <span id="timer-display">0</span></h2>
     </section>
   </header>
 
   <main>
+    
     <section id="start-screen">
       <h1>Coding Quiz Challenge</h1>
       <p>Try to answer the following code-related questions within the time limit.  Keep in mind that incorrect answers will penalise your scoretime by ten seconds!</p>
@@ -25,8 +27,12 @@
     </section>
 
     <section id="question-screen" class = "hide">
-      <h2 class="question-asked">placeholder</h2>
-      <!-- javascript to insert answers as a list of buttons.  User will click on the desired answer -->
+      <!-- show the question -->
+      <h2 class="question-asked"></h2>
+      <!-- show the answer list. Javascript to insert answers as a list of buttons.  User will click on the desired answer -->
+      <ol id="answer-list">
+
+      </ol>
       <p id="result">placeholder corrent or incorrect</p>
 
     </section>

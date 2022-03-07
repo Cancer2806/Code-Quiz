@@ -2,16 +2,14 @@
 
 const quiz = [{
   qu: "How many roads must a man walk down?",
-  an1: "Who knows",
-  an2: "depends, gravel or bitumen",
-  an3: "depends on the man",
-  an4: "7",
+  answers: ["Who knows", "depends, gravel or bitumen", "depends on the man", "7"],
   correct: 3
 }, {
-  qu: "How many roads must a man walk down?",
-  an1: "Who knows",
-  an2: "depends, gravel or bitumen",
-  an3: "depends on the man",
-  an4: "7",
-  correct: 3
-}]
+  qu: "How do you find the highest value of x and y?",
+  answers: ["Math.max(x,y)", "ceil(x,y)", "Math.ceil(x,y)", "top(x,y)"],
+  correct: 1
+  }, {
+    qu: "Which operator is used to assign a value to a variable?",
+    answers: ["*", "=", "-", "X"],
+    correct: 2
+  }]

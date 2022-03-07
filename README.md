@@ -25,7 +25,8 @@ JS is contained in one file: ./assets/js/script.js
 
 ## Credits
 Repository for the submission of Week 4's Homework in UWA's Bootcamp series
-
+https://tutorialslink.com/mcq-quiz/java-script-mcq-quiz-multiple-choice-questions-and-answers
+https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS
 
 ## License
 Not applicable

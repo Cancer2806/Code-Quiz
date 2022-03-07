@@ -4,18 +4,50 @@ const highscoreBtn = document.getElementById("high-score");
 const submitBtn = document.getElementById("submit");
 const goBackBtn = document.getElementById("go-back");
 const clearScoreBtn = document.getElementById("clear-scores");
-const timerText = document.getElementById("timer-countdown");
+const timerText = document.getElementById("timer-display");
 const startScrn = document.getElementById("start-screen");
 const questionScrn = document.getElementById("question-screen");
 const gameoverScrn = document.getElementById("game-over");
 const highScoreScrn = document.getElementById("high-score");
 const finalScoreText = document.getElementById("final-score");
+const questionAsked = document.querySelector(".question-asked");
+const answerList = document.querySelector("#answer-list");
+const questionResult = document.querySelector("#result");
 
+// Global variables and assignments
+let timeRemaining = 70;
+let finalScore = 0;
+let initials = "";
 
-// Global variables
-timeRemaining = 70;
-finalScore = 0;
-initials = ""
+questionResult.textContent = "";
+
+function checkAnswer() {
+
+}
+
+function quizQuestions() {
+  questionScrn.classList.remove("hide");
+
+  answerList.textContent = "";
+  // loop through the questions
+  for (var i = 0; i < quiz.length; i++) {
+    const question = quiz[i];
+    questionAsked.textContent = question.qu;
+    for (var j = 0; j < 4; j++) {
+      // create button list of answers
+      const answer = question.answers[j];
+      const li = document.createElement('li');
+      const button = document.createElement('button');
+      button.textContent = answer;
+      button.addEventListener('click', checkAnswer);
+      li.appendChild(button);
+      answerList.append(li);
+    }
+
+  }
+
+}
+
 
 function beginQuiz() {
   // start timer
@@ -23,13 +55,27 @@ function beginQuiz() {
   // display question screen
   // pose questions
   console.log("apples");
-  startScrn.classList.add("hide");
-  questionScrn.classList.remove("hide");
+  // disable High Scores button while quiz is in progress
 
+  highscoreBtn.disabled = true;
+  // remove startup screen
+  startScrn.classList.add("hide");
+  
+  // ensure timer reset
+  timerRemaining = 70;
+  timerText.textContent = timerRemaining;
+  quizQuestions();
+}
+
+function showHighScores() {
+  
 }
 
 // When user clicks on Start, start the quiz by calling beginQuiz
 startBtn.addEventListener("click", beginQuiz);
+
+// When user clicks on High Scores, go to the highscores screen
+highscoreBtn.addEventListener("click", showHighScores);
   
   
 // pseudo code
