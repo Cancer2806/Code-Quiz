@@ -15,60 +15,135 @@ const answerList = document.querySelector("#answer-list");
 const questionResult = document.querySelector("#result");
 
 // Global variables and assignments
-let timeRemaining = 70;
+let timer;
+let timeRemaining;
 let finalScore = 0;
 let initials = "";
+let questionIndex;
 
 questionResult.textContent = "";
 
-function checkAnswer() {
+function checkAnswer(event) {
+  event.preventDefault();
+  console.log("inCheckAnswer");
+  console.log(event);
 
+  const correctAnswer = event.target.getAttribute('correct') === 'true';
+  console.log(`correct answer is ${correctAnswer}`);
+  if (correctAnswer) {
+    console.log(`correct answer received`);
+  } else {
+    timeRemaining = timeRemaining - 10;
+    console.log('wrong answer given');
+  }
+  // move to next question
+  questionIndex = questionIndex + 1;
+  if (questionIndex < quiz.length) {
+    getQuestions(questionIndex);
+  } else {
+    // when all questions answered correctly, trigger win condition
+    questionIndex = questionIndex + 1;
+  }
+  return;
+}
+
+function startTimer() {
+  console.log("inStartTimer")
+  // set Timer
+  timer = setInterval(function () {
+    timeRemaining--;
+    timerText.textContent = timeRemaining;
+ 
+    // check if all questions answered correctly
+    if (questionIndex > quiz.length) {
+      // stop timer and set final score to time remaining
+      clearInterval(timer);
+      finalScore = timeRemaining;
+      console.log(`final score is ${finalScore}`)
+      endQuiz();
+    }
+    // condition if player runs out of time
+    if (timeRemaining <= 0) {
+      // stop timer and set final score to zero
+      clearInterval(timer);
+      timeRemaining = 0;
+      timerText.textContent = timeRemaining;
+      finalScore = 0;
+      console.log(`final score end timer is ${finalScore}`)
+      endQuiz();
+    }
+  }, 1000);
 }
 
 function quizQuestions() {
-  questionScrn.classList.remove("hide");
-
+  console.log(`in quizQuestions and questionIndex = ${questionIndex}`);
+  
   answerList.textContent = "";
-  // loop through the questions
-  for (var i = 0; i < quiz.length; i++) {
-    const question = quiz[i];
+    // render current question and answers
+    const question = quiz[questionIndex];
     questionAsked.textContent = question.qu;
-    for (var j = 0; j < 4; j++) {
-      // create button list of answers
-      const answer = question.answers[j];
+    for (var i = 0; i < question.answers.length; i++) {
+      // render answers as a list of buttons
+      const answer = question.answers[i];
       const li = document.createElement('li');
       const button = document.createElement('button');
       button.textContent = answer;
+      // add button attribute to identify correct answer
+      if (question.correct == i) {
+        button.setAttribute('correct', true);
+      } else {
+        button.setAttribute('correct', false);
+      }
       button.addEventListener('click', checkAnswer);
       li.appendChild(button);
       answerList.append(li);
-    }
-
+    } 
+  return;
   }
 
+function getQuestions(questionIndex) {
+  console.log(`inGetQuestion and questionIndex = ${questionIndex}`)
+  
+  quizQuestions(questionIndex);
+  
+  return;
 }
 
+function endQuiz() {
+  console.log("inendQuiz");
+ 
+  finalScoreText.textContent = finalScore;
+  // hide question screen
+  questionScrn.classList.add("hide");
+   // hide question screen
+  gameoverScrn.classList.remove("hide");
+}
 
 function beginQuiz() {
   // start timer
-  // hide startscreen
+  
   // display question screen
   // pose questions
-  console.log("apples");
+  console.log("inBeginQuiz");
   // disable High Scores button while quiz is in progress
 
   highscoreBtn.disabled = true;
-  // remove startup screen
+  // hide startup screen
   startScrn.classList.add("hide");
   
   // ensure timer reset
-  timerRemaining = 70;
-  timerText.textContent = timerRemaining;
-  quizQuestions();
+  timeRemaining = 70;
+  timerText.textContent = timeRemaining;
+  
+  questionScrn.classList.remove("hide");
+  questionIndex = 0;
+  startTimer();
+  getQuestions(questionIndex);
+  return;
 }
 
 function showHighScores() {
-  
+  console.log(`inshowHighScores`)
 }
 
 // When user clicks on Start, start the quiz by calling beginQuiz
@@ -80,30 +155,9 @@ highscoreBtn.addEventListener("click", showHighScores);
   
 // pseudo code
 
-// setup sections in html to represent the different screens to be used and use the Display: none; property to switch between them
-
-// first screen will be the start screen which contains the instructions and the Start button
-// second screen will present each question.  Questions and answers to be contained in an object accessible through array/for loops.  decide whether to use random access or sequentially work through questions
 // all done screen to present when either the timer runs out (no score), or all questions are answered and there is still time left (score is the amount of time left).  If there is a score, player will be asked to enter initials and submit to the highest score board
 // play again button will take player back to the start screen
 // highscores screen will show a list of the highest scores in order from highest to lowest.  It will have a back button and a button to clear the high scores table
-
-// correct answer will go on to next question
-// incorrect answer will deduct ten seconds from timer
-
-// high score and the timer show at the top of all screens except the high score screen so put in header
-
-// variables for accessing html elements
-
-// global variables for keeping score and timer display/control
-
-// event listener for start button
-
-// timer start function
-
-// timer end function
-
-// display questions functions
 
 // game over functions - either all questions answered or the timer reaches zero
 
