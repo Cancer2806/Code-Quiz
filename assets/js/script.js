@@ -13,29 +13,26 @@ const finalScoreText = document.getElementById("final-score");
 const questionAsked = document.querySelector(".question-asked");
 const answerList = document.querySelector("#answer-list");
 const questionResult = document.querySelector("#result");
+const initials = document.querySelector('#initials');
 
 // Global variables and assignments
 let timer;
 let timeRemaining;
 let finalScore = 0;
-let initials = "";
 let questionIndex;
+const savedNames = [];
+const savedScores = [];
 
 questionResult.textContent = "";
+initials.textContent = "";
 
 function checkAnswer(event) {
   event.preventDefault();
-  console.log("inCheckAnswer");
-  console.log(event);
-
   const correctAnswer = event.target.getAttribute('correct') === 'true';
-  console.log(`correct answer is ${correctAnswer}`);
   if (correctAnswer) {
-    console.log(`correct answer received`);
     questionResult.textContent="Correct!"
   } else {
     timeRemaining = timeRemaining - 10;
-    console.log('wrong answer given');
     questionResult.textContent = "Wrong!";
   }
   // move to next question
@@ -61,7 +58,6 @@ function startTimer() {
       // stop timer and set final score to time remaining
       clearInterval(timer);
       finalScore = timeRemaining;
-      console.log(`final score is ${finalScore}`)
       endQuiz();
     }
     // condition if player runs out of time
@@ -71,15 +67,12 @@ function startTimer() {
       timeRemaining = 0;
       timerText.textContent = timeRemaining;
       finalScore = 0;
-      console.log(`final score end timer is ${finalScore}`)
       endQuiz();
     }
   }, 1000);
 }
 
 function quizQuestions() {
-  console.log(`in quizQuestions and questionIndex = ${questionIndex}`);
-  
   answerList.textContent = "";
     // render current question and answers
     const question = quiz[questionIndex];
@@ -104,44 +97,52 @@ function quizQuestions() {
   }
 
 function getQuestions(questionIndex) {
-  console.log(`inGetQuestion and questionIndex = ${questionIndex}`)
-  
   quizQuestions(questionIndex);
-  
-  return;
+return;
 }
 
-function returnStart() {
+function returnStart(event) {
   // submit initials and score to local storage
-  // display start Page again
+  event.preventDefault();
+  let tempName = initials.value.trim();
+  console.log(`name entered is ${tempName}`);
+  savedNames.push("frank");
+  savedScores.push(25);
+  console.log(`Frank ${savedNames} ${savedScores}`)
+  savedNames.push(tempName);
+  savedScores.push(finalScore);
+  console.log(`savedNames ${savedNames}`)
+  console.log(`savedScores ${savedScores}`);
+   
+  // if (savedScore.initialsText != "") {
+  const arry = {savedNames, savedScores};
+  console.log(`Array of both:  ${arry}`);
+  localStorage.setItem("storedArry", JSON.stringify(arry));
+  // }
+
   // re-enable high score button
   console.log(`inReturnStart`);
   highscoreBtn.disabled = false;
+  // display start Page again
   gameoverScrn.classList.add("hide");
   startScrn.classList.remove("hide");
 }
 
 function endQuiz() {
   console.log("inendQuiz");
- 
+  // display players final score
   finalScoreText.textContent = finalScore;
   // hide question screen
   questionScrn.classList.add("hide");
-   // hide question screen
+   // show Gameover screen - allows user to enter initials
   gameoverScrn.classList.remove("hide");
   submitBtn.addEventListener("click", returnStart);
-
   return;
 }
 
 function beginQuiz() {
-  // start timer
-  
-  // display question screen
-  // pose questions
   console.log("inBeginQuiz");
   // disable High Scores button while quiz is in progress
-
   highscoreBtn.disabled = true;
   // hide startup screen
   startScrn.classList.add("hide");
@@ -149,9 +150,10 @@ function beginQuiz() {
   // ensure timer reset
   timeRemaining = 70;
   timerText.textContent = timeRemaining;
-  
+  // display question screen
   questionScrn.classList.remove("hide");
   questionIndex = 0;
+  // start timer
   startTimer();
   getQuestions(questionIndex);
   return;
