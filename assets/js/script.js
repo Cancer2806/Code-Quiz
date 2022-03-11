@@ -14,17 +14,14 @@ const questionAsked = document.querySelector(".question-asked");
 const answerList = document.querySelector("#answer-list");
 const questionResult = document.querySelector("#result");
 const initials = document.querySelector('#initials');
+const scoreList = document.querySelector('#score-list');
 
 // Global variables and assignments
 let timer;
 let timeRemaining;
 let finalScore = 0;
 let questionIndex;
-const savedNames = [];
 const savedScores = [];
-
-questionResult.textContent = "";
-initials.textContent = "";
 
 function checkAnswer(event) {
   event.preventDefault();
@@ -47,8 +44,7 @@ function checkAnswer(event) {
 }
 
 function startTimer() {
-  console.log("inStartTimer")
-  // set Timer
+  // set interval and start Timer
   timer = setInterval(function () {
     timeRemaining--;
     timerText.textContent = timeRemaining;
@@ -58,6 +54,7 @@ function startTimer() {
       // stop timer and set final score to time remaining
       clearInterval(timer);
       finalScore = timeRemaining;
+      // go to final score screen
       endQuiz();
     }
     // condition if player runs out of time
@@ -67,6 +64,7 @@ function startTimer() {
       timeRemaining = 0;
       timerText.textContent = timeRemaining;
       finalScore = 0;
+      // go to final score screen
       endQuiz();
     }
   }, 1000);
@@ -101,35 +99,75 @@ function getQuestions(questionIndex) {
 return;
 }
 
+function renderHighScores() {
+  console.log("in RenderHighScores");
+
+  let tempScoreName = "";
+  let tempHighScore;
+
+  if (savedScores.length != 0) {
+    for (i = 0; i < savedScores.length; i++) {
+      tempScoreName = savedScores[i].saveName;
+      tempHighScore = savedScores[i].saveScore;
+
+      const li = document.createElement("li");
+      li.textContent = tempHighScore + " by " + tempScoreName;
+      console.log("contents of list item:  " + li.textContent);
+      scoreList.appendChild(li);
+    }
+  }
+  return;
+}
+
+// This section not working correctly - will not remove "hide" class from highScoreScreen - works for other screens if substituted in
+function showHighScores(event) {
+  event.preventDefault();
+  console.log(`inshowHighScores`);
+  highScoreScrn.classList.remove("hide");
+  startScrn.classList.add("hide");
+  getHighScores();
+  renderHighScores();
+  
+  console.log(`savedScore length is ${savedScores.length}`);
+
+  goBackBtn.addEventListener("click", beginQuiz);
+  clearScoreBtn.addEventListener("click", clearHighScores);
+  
+  return;
+}
+
 function returnStart(event) {
   // submit initials and score to local storage
   event.preventDefault();
+  
   let tempName = initials.value.trim();
   console.log(`name entered is ${tempName}`);
-  savedNames.push("frank");
-  savedScores.push(25);
-  console.log(`Frank ${savedNames} ${savedScores}`)
-  savedNames.push(tempName);
-  savedScores.push(finalScore);
-  console.log(`savedNames ${savedNames}`)
-  console.log(`savedScores ${savedScores}`);
-   
-  // if (savedScore.initialsText != "") {
-  const arry = {savedNames, savedScores};
-  console.log(`Array of both:  ${arry}`);
-  localStorage.setItem("storedArry", JSON.stringify(arry));
-  // }
+  // create object with player name and score
+  const tempObj = {
+    saveName: tempName,
+    saveScore: finalScore
+  }
+  // add player name and score to end of savedScores array
+  if (tempName != "") {
+    savedScores.push(tempObj);
+  }
 
+  // write updated high score list to local storage
+  localStorage.setItem("storedScores", JSON.stringify(savedScores));  
+  console.log(`savedScores ${savedScores.length}`);
+  // reset savedScores to 0, to ensure only updated once
+  savedScores.length = 0;
+  tempName = "";
+   
   // re-enable high score button
-  console.log(`inReturnStart`);
   highscoreBtn.disabled = false;
   // display start Page again
   gameoverScrn.classList.add("hide");
   startScrn.classList.remove("hide");
+  return;
 }
 
 function endQuiz() {
-  console.log("inendQuiz");
   // display players final score
   finalScoreText.textContent = finalScore;
   // hide question screen
@@ -140,8 +178,37 @@ function endQuiz() {
   return;
 }
 
+function clearHighScores(event) {
+  event.preventDefault;
+  console.log("inclearHighScores");
+
+  const clearEntry = [];
+  clearEntry.length = 0;
+  // set local storage to empty array to clear saved scores
+  localStorage.setItem("storedScores", JSON.stringify(clearEntry));
+  console.log("storage now contains:  " + JSON.parse(localStorage.getItem("storedScores")));
+  return;
+}
+
+function getHighScores() {
+  // get high scores from local storage
+  let tempScores = JSON.parse(localStorage.getItem("storedScores"));
+ 
+  if (tempScores != null) {
+    // add each name/score object in storage to savedScores
+    for (i = 0; i < tempScores.length; i++) {
+      savedScores[i] = tempScores[i];
+    }
+  }
+  return;
+}
+
 function beginQuiz() {
-  console.log("inBeginQuiz");
+  // reset variables
+  questionResult.textContent = "";
+  initials.textContent = "";
+  // savedScores.length = 0;
+  
   // disable High Scores button while quiz is in progress
   highscoreBtn.disabled = true;
   // hide startup screen
@@ -159,12 +226,7 @@ function beginQuiz() {
   return;
 }
 
-function showHighScores() {
-  console.log(`inshowHighScores`);
-  highScoreScrn.classList.remove("hide");
-  startScrn.classList.add("hide");
-  
-}
+getHighScores();
 
 // When user clicks on Start, start the quiz by calling beginQuiz
 startBtn.addEventListener("click", beginQuiz);
@@ -175,11 +237,8 @@ highscoreBtn.addEventListener("click", showHighScores);
   
 // pseudo code
 
-// all done screen to present when either the timer runs out (no score), or all questions are answered and there is still time left (score is the amount of time left).  If there is a score, player will be asked to enter initials and submit to the highest score board
 // play again button will take player back to the start screen
 // highscores screen will show a list of the highest scores in order from highest to lowest.  It will have a back button and a button to clear the high scores table
-
-// game over functions - either all questions answered or the timer reaches zero
 
 // enter and save score in local storage
 
