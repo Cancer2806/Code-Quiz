@@ -19,14 +19,19 @@ The webpage is located at this address:  https://cancer2806.github.io/Code-Quiz/
 
 ![Application Screenshot](./assets/images/xxx.png)
 
-CSS is contained in one file:  ./assets/css/style.css
-JS is contained in one file: ./assets/js/script.js
+CSS is contained in two files:  
+  ./assets/css/reset.css is used to ensure a common start for styling
+  ./assets/css/style.css is used for all other styling
+
+JS is contained in two files: 
+  ./assets/js/quiz.js holds the actual quiz questions to keep the main script.js file readable
+  ./assets/js/script.js holds all the working JS code
 
 
 ## Credits
-Repository for the submission of Week 4's Homework in UWA's Bootcamp series
-https://tutorialslink.com/mcq-quiz/java-script-mcq-quiz-multiple-choice-questions-and-answers
-https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS
+Repository for the submission of Week 4's Homework in UWA's Bootcamp series provided the initial questions
+
+https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS was used to fill out the remaining questions
 
 ## License
 Not applicable
