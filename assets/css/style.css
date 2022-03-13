@@ -16,7 +16,20 @@ h2 {
 }
 
 /* Class selectors */
+.list-answer {
+  color: blue;
+  background-color: grey;
+}
 
+.btn-answer {
+  color: blue;
+  background-color: yellow;
+}
+
+.li-highscore {
+  font-weight: bolder;
+  background-color: darksalmon;
+}
 
 /* ID selectors */
 

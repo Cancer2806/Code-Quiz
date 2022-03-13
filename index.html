@@ -10,13 +10,13 @@
 </head>
 
 <body>
-  <header>
+  <!-- <header>
     <!-- place highscore button and timer in header so that always visible at top of screen -->
-    <section id="head">
-      <h2><button id="high-score">View Highscores</button></h2>
-      <h2 id="timer-countdown">Time Remaining:  <span id="timer-display">0</span></h2>
-    </section>
-  </header>
+    <!-- <section id="head"> -->
+      <!-- <h2><button id="high-score">View Highscores</button></h2> -->
+      <!-- <h2 id="timer-countdown">Time Remaining:  <span id="timer-display">0</span></h2> -->
+    <!-- </section> -->
+  <!-- </header> -->
 
   <main>
     
@@ -24,9 +24,11 @@
       <h1>Coding Quiz Challenge</h1>
       <p>Try to answer the following code-related questions within the time limit.  Keep in mind that incorrect answers will penalise your scoretime by ten seconds!</p>
       <button id="start-button">Start Quiz</button>
+      <button id="high-score">View Highscores</button>
     </section>
 
     <section id="question-screen" class = "hide">
+      <h2 id="timer-countdown">Time Remaining: <span id="timer-display">0</span></h2>
       <div>
         <!-- show the question -->
         <h2 class="question-asked"></h2>
@@ -34,13 +36,13 @@
         <ol id="answer-list">
         </ol>
       </div>
-      
       <div>
         <!-- show whether correct or wrong -->
         <br>
         <p id="result">placeholder correct or incorrect</p>
       </div>
     </section>
+    
     <section id="game-over" class="hide">
       <h2>Alll done!</h2>
       <h3>Your final score is: <span id="final-score">placeholder</span>  </h3>
@@ -50,17 +52,16 @@
         <input type="text" id="initials" name="initials">
         <button id="submit">Submit</button>
       </form>
-    </section>
+    </section>  
 
-    <section id="high-score" class="hide">
-      <h2>Highscores</h2>
-      <!-- Table of high scores from local storage created by JS and inserted, possibly inside a form -->
-      <ol id="score-list"></ol>
-      
-      <p>This screen should show shouldn't it?</p>
-      <button id="go-back">Go Back</button>
-      <button id="clear-scores">Clear Highscores</button>
-
+    <!-- add hide class back to setion when bug resolved  -->
+    <section id="high-score">
+        <h2>Highscores</h2>
+        <!-- Table of high scores from local storage created by JS and inserted, possibly inside a form -->
+        <ol id="score-list"></ol>
+        <br>
+        <button id="go-back">Go Back</button>
+        <button id="clear-scores">Clear Highscores</button>
     </section>
 
   </main>
