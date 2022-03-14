@@ -1,6 +1,6 @@
 // Variables for accessing html
 const btnStart = document.getElementById("start-button");
-const btnHighScores = document.getElementById("high-score");
+const btnHighScores = document.getElementById("btn-high-score");
 const btnSubmit = document.getElementById("submit");
 const btnGoBack = document.getElementById("go-back");
 const btnClearHighScores = document.getElementById("clear-scores");
@@ -206,10 +206,8 @@ function renderHighScores() {
 // This section not working correctly - will not remove "hide" class from highScoreScreen
 // Function to display High Scores list
 function showHighScores(event) {
-    
-  // The next line is not working
+  // Show the high score screen
   scrnHighScore.classList.remove("hide");
-
   // From here down is working as planned
   scrnStart.classList.add("hide");
   // Retrieve high scores from local storage

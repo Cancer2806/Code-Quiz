@@ -15,7 +15,7 @@
       <h1>Coding Quiz Challenge</h1>
       <p class="start-text">Try to answer the following code-related questions within the time limit.  Keep in mind that incorrect answers will penalise your scoretime by ten seconds!</p>
       <button id="start-button" class="btn-main">Start Quiz</button>
-      <button id="high-score" class="btn-main">View Highscores</button>
+      <button id="btn-high-score" class="btn-main">View Highscores</button>
     </section>
 
     <section id="question-screen" class = "hide box">
@@ -45,11 +45,11 @@
       </form>
     </section>  
 
-    <section id="high-score" class="box">
-      <h2 id="num-high-scores">placeholder</h2>
-      <!-- Table of high scores from local storage created by JS and inserted, possibly inside a form -->
+    <section id="high-score" class="hide box">
+      <h2 id="num-high-scores">No scores have been saved - play to earn your score</h2>
+      <!-- li items created by JS with high scores retrieved from local storage -->
       <ul id="score-list"></ul>
-      <button id="go-back" class="btn-score">Play Again</button>
+      <button id="go-back" class="btn-score">Return to Quiz</button>
       <button id="clear-scores" class="btn-score">Clear Highscores</button>
     </section>
     </div>
