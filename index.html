@@ -10,24 +10,15 @@
 </head>
 
 <body>
-  <!-- <header>
-    <!-- place highscore button and timer in header so that always visible at top of screen -->
-    <!-- <section id="head"> -->
-      <!-- <h2><button id="high-score">View Highscores</button></h2> -->
-      <!-- <h2 id="timer-countdown">Time Remaining:  <span id="timer-display">0</span></h2> -->
-    <!-- </section> -->
-  <!-- </header> -->
-
-  <main>
-    
-    <section id="start-screen">
+    <main>
+    <section id="start-screen" class="box">
       <h1>Coding Quiz Challenge</h1>
-      <p>Try to answer the following code-related questions within the time limit.  Keep in mind that incorrect answers will penalise your scoretime by ten seconds!</p>
-      <button id="start-button">Start Quiz</button>
-      <button id="high-score">View Highscores</button>
+      <p class="start-text">Try to answer the following code-related questions within the time limit.  Keep in mind that incorrect answers will penalise your scoretime by ten seconds!</p>
+      <button id="start-button" class="btn-main">Start Quiz</button>
+      <button id="high-score" class="btn-main">View Highscores</button>
     </section>
 
-    <section id="question-screen" class = "hide">
+    <section id="question-screen" class = "hide box">
       <h2 id="timer-countdown">Time Remaining: <span id="timer-display">0</span></h2>
       <div>
         <!-- show the question -->
@@ -36,36 +27,33 @@
         <ol id="answer-list">
         </ol>
       </div>
-      <div>
+      <div class="result-container">
         <!-- show whether correct or wrong -->
         <br>
         <p id="result">placeholder correct or incorrect</p>
       </div>
     </section>
     
-    <section id="game-over" class="hide">
+    <section id="game-over" class="hide box">
       <h2>Alll done!</h2>
-      <h3>Your final score is: <span id="final-score">placeholder</span>  </h3>
+      <h3>Your final score is: <span id="final-score">placeholder</span></h3>
       <form class="submit-score" method="POST">
         <!-- Enter initials text field -->
-        <label for = "initials">Enter your initials: </label>
+        <label for = "initials">Enter your initials:  </label>
         <input type="text" id="initials" name="initials">
         <button id="submit">Submit</button>
       </form>
     </section>  
 
-    <!-- add hide class back to setion when bug resolved  -->
-    <section id="high-score">
-        <h2>Highscores</h2>
-        <!-- Table of high scores from local storage created by JS and inserted, possibly inside a form -->
-        <ol id="score-list"></ol>
-        <br>
-        <button id="go-back">Go Back</button>
-        <button id="clear-scores">Clear Highscores</button>
+    <section id="high-score" class="box">
+      <h2 id="num-high-scores">placeholder</h2>
+      <!-- Table of high scores from local storage created by JS and inserted, possibly inside a form -->
+      <ul id="score-list"></ul>
+      <button id="go-back" class="btn-score">Play Again</button>
+      <button id="clear-scores" class="btn-score">Clear Highscores</button>
     </section>
-
+    </div>
   </main>
-
 
   <script src="./assets/js/quiz.js"></script>
   <script src="./assets/js/script.js"></script>

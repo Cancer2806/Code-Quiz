@@ -19,7 +19,7 @@ const quiz = [{
   }, {
     question: "What is the correct way to write a JavaScript array?",
   answers: ["var colors = [\"red\", \"blue\", \"green\"]", "var colors = 1 = (\"red\"), 2=(\"green\"), 3=(\"blue\")", "var colors =(1: \"red\", 2:\"green\", 3:=\"blue\")", "var colors =\"red\", \"green\", \"blue\""],
-    correct: 1
+    correct: 0
   }, {
     question: "How to write an IF statement for executing some code if 'i' is NOT equal to 5?",
     answers: ["if(i != 5)", "if(i <> 5)", "if i != 5 then", "if i <> 5"],
@@ -33,7 +33,7 @@ const quiz = [{
     answers: ["<js>", "<scripting>", "<js>", "<script>"],
     correct: 3
   }, {
-  question: "How many roads must a person walk down?",
-  answers: ["A person should drive", "Depends on whether it's gravel or bitumen", "Depends on the person", "42"],
+  question: "How many roads must a man walk down?",
+  answers: ["A person should drive", "Depends on the road", "Depends on the person", "42"],
   correct: 2
   }]

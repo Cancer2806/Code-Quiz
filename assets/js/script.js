@@ -13,6 +13,7 @@ const txtFinalScore = document.getElementById("final-score");
 const txtAskQuestion = document.querySelector(".question-asked");
 const lstAnswers = document.querySelector("#answer-list");
 const txtResult = document.querySelector("#result");
+const txtHighScore = document.querySelector('#num-high-scores');
 const inptInitials = document.querySelector('#initials');
 const lstScoreList = document.querySelector('#score-list');
 
@@ -144,7 +145,7 @@ function quizQuestions(idxQuestion) {
     }
     li.appendChild(button);
     lstAnswers.append(li);
-    // add listener to determine if current answer is selected
+    // add listener to determine if current answer item is selected
     button.addEventListener('click', checkAnswer);
   }
   return;
@@ -159,10 +160,6 @@ function beginQuiz() {
   txtTimer.textContent = timeRemaining;
   idxQuestion = 0;
   savedScores.length = 0;
-
-  // disable High Scores button while quiz is in progress
-  btnHighScores.disabled = true;
-
   // hide startup screen
   scrnStart.classList.add("hide");
   // display question screen
@@ -189,13 +186,16 @@ function renderHighScores() {
   })
   // creates and renders high scores if there are any saved
   if (savedScores.length != 0) {
-    // limit the display to length fo savedScores or 5, whichever is the lesser
+    // limit the display to length of savedScores or 5, whichever is the lesser
     if (savedScores.length < 5) {
       numToDisplay = savedScores.length;
     }
+    // set title text of High Score screen
+    txtHighScore.textContent = `Top ${numToDisplay} Scorers`
+    // render list of high scorers to the screen
     for (i = 0; i < numToDisplay; i++) {
       const li = document.createElement("li");
-      li.textContent = savedScores[i].saveScore + " by " + savedScores[i].saveName;
+      li.textContent = savedScores[i].saveName + ":  " + savedScores[i].saveScore;
       li.classList.add("li-highscore");
       lstScoreList.appendChild(li);
     }
@@ -203,7 +203,7 @@ function renderHighScores() {
   return;
 }
 
-// This section not working correctly - will not remove "hide" class from highScoreScreen - works for other screens if substituted in
+// This section not working correctly - will not remove "hide" class from highScoreScreen
 // Function to display High Scores list
 function showHighScores(event) {
     
